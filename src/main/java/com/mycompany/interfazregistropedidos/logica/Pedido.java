@@ -29,7 +29,7 @@ public class Pedido implements Serializable {
     
     //Relaciones
     @OneToOne
-    private Cliente cliente; //Esto hab´ra que modificar en el 2° video pq es la analogia de Mascot OneToOne Duenio
+    private Cliente cliente; 
     
 
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.PERSIST, orphanRemoval = true)
