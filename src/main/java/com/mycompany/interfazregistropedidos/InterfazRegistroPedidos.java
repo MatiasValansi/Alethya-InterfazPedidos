@@ -4,6 +4,7 @@ import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.mycompany.interfazregistropedidos.igu.Principal;
+import com.mycompany.interfazregistropedidos.logica.Excel;
 import javax.swing.UIManager;
 
 public class InterfazRegistroPedidos {
