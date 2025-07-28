@@ -488,7 +488,7 @@ public class ArmarPedido extends javax.swing.JFrame implements Funcionamiento, P
             this.pedidoAArmar.setTotal(total);
             this.pedidoAArmar.setCliente(controladora.buscarCliente(cuitCliente));
             
-            System.out.println(this.pedidoAArmar.getCliente().getNombre());
+            
             
             /*
             Añado los ProductosPedidos añadidos a la tabla en la BD

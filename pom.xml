@@ -64,4 +64,33 @@
         <maven.compiler.target>17</maven.compiler.target>
         <exec.mainClass>com.mycompany.interfazregistropedidos.InterfazRegistroPedidos</exec.mainClass>
     </properties>
+      <build>
+        <plugins>
+            <!-- Plugin para generar un .jar ejecutable con todas las dependencias -->
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.6.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.mycompany.interfazregistropedidos.InterfazRegistroPedidos</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <finalName>InterfazRegistroPedidos</finalName>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id> <!-- obligatorio -->
+                        <phase>package</phase> <!-- ejecutarse durante "mvn package" -->
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
