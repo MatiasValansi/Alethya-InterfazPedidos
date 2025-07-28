@@ -157,7 +157,7 @@ public class VerProductos extends javax.swing.JFrame implements Cargable{
         if (tablaProductos.getRowCount() > 0) {
             
             if (tablaProductos.getSelectedRow() != -1) {                
-                int codigoProducto = Integer.parseInt(String.valueOf(tablaProductos.getValueAt(tablaProductos.getSelectedRow(), PRIMERA_COLUMNA)));
+                String codigoProducto = String.valueOf(tablaProductos.getValueAt(tablaProductos.getSelectedRow(), PRIMERA_COLUMNA));
                 //Guardo el nombre de la persona
                 String nombreProducto = String.valueOf(tablaProductos.getValueAt(tablaProductos.getSelectedRow(), NOMBRE_COLUMNA));
                 controladora.eliminarProducto(codigoProducto);
@@ -196,7 +196,7 @@ public class VerProductos extends javax.swing.JFrame implements Cargable{
         if (tablaProductos.getRowCount() > 0) {
             
             if (tablaProductos.getSelectedRow() != -1) {                
-                int codigoProducto = Integer.parseInt(String.valueOf(tablaProductos.getValueAt(tablaProductos.getSelectedRow(), PRIMERA_COLUMNA)));
+                String codigoProducto = String.valueOf(tablaProductos.getValueAt(tablaProductos.getSelectedRow(), PRIMERA_COLUMNA));
                 //Guardo el nombre de la persona
                 String nombreProducto = String.valueOf(tablaProductos.getValueAt(tablaProductos.getSelectedRow(), NOMBRE_COLUMNA));
                 

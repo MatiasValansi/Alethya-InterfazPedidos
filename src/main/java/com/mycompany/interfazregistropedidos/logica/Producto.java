@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 @Entity
 public class Producto implements Serializable {
     @Id
-    private int codigo;
+    private String codigo; //El código será alfanumérico, no un int como estaba de inicio
     private String nombre;
     private String descripcion;
     private double precio;
@@ -26,7 +26,7 @@ public class Producto implements Serializable {
     public Producto() {
     } 
 
-    public Producto(int codigo, String nombre, String descripcion, double precio, int cantStock, List<ProductoPedido> pedidos) {
+    public Producto(String codigo, String nombre, String descripcion, double precio, int cantStock, List<ProductoPedido> pedidos) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -35,11 +35,11 @@ public class Producto implements Serializable {
         this.pedidos = pedidos;
     }
 
-    public int getCodigo() {
+    public String getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(int codigo) {
+    public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
 

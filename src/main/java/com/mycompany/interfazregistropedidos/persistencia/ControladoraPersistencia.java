@@ -94,7 +94,7 @@ public class ControladoraPersistencia {
         }
     }
 
-    public void eliminarProducto(int codigoProducto) {
+    public void eliminarProducto(String codigoProducto) {
         try {
             productoController.destroy(codigoProducto);
         } catch (IllegalOrphanException ex) {
@@ -124,7 +124,7 @@ public class ControladoraPersistencia {
         }
     }
 
-    public Producto buscarProducto(int codigoProdAEditar) {
+    public Producto buscarProducto(String codigoProdAEditar) {
         return productoController.findProducto(codigoProdAEditar);
     }
 

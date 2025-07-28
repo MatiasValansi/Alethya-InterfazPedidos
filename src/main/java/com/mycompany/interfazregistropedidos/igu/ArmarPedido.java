@@ -651,7 +651,7 @@ public class ArmarPedido extends javax.swing.JFrame implements Funcionamiento, P
         if (!this.txtCodProducto.equals("")) {
 
             try {
-                this.productoArmarPedido = controladora.buscarProducto(Integer.parseInt(this.txtCodProducto.getText()));
+                this.productoArmarPedido = controladora.buscarProducto(this.txtCodProducto.getText());
                 this.mostrarMensaje(productoArmarPedido.getNombre(), "Producto:", "Producto Hallado");
                 this.btnProductoHallado.setText(productoArmarPedido.getNombre());
 

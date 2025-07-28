@@ -79,7 +79,7 @@ public class ControladoraLogica {
     
     
     //Método Guardar de AgregarProducto
-    public void guardarProducto(int codigoProducto, String nombre, String descripcion, int cantStock, double precio) {
+    public void guardarProducto(String codigoProducto, String nombre, String descripcion, int cantStock, double precio) {
         
         //Genero el Producto
         Producto producto = new Producto();
@@ -160,7 +160,7 @@ public class ControladoraLogica {
         controlPers.eliminarPedido(remitoPedido);
     }
 
-    public void eliminarProducto(int codigoProducto) {
+    public void eliminarProducto(String codigoProducto) {
         controlPers.eliminarProducto(codigoProducto);
     }
 
@@ -190,11 +190,11 @@ public class ControladoraLogica {
         controlPers.editarCliente(clienteEditado);
     }
 
-    public Producto buscarProducto(int codigoProdAEditar) {
+    public Producto buscarProducto(String codigoProdAEditar) {
         return controlPers.buscarProducto(codigoProdAEditar);
     }
 
-    public void editarProducto(int codigoProducto, String nombre, String descripcion, int cantStock, double precio) {
+    public void editarProducto(String codigoProducto, String nombre, String descripcion, int cantStock, double precio) {
         //Intento hacerlo de otra forma distinta a editarCliente
         
         Producto productoEditado = this.buscarProducto(codigoProducto);

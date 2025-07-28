@@ -14,12 +14,12 @@ import javax.swing.JOptionPane;
 public class EditarProducto extends javax.swing.JFrame implements Funcionamiento{
 
         ControladoraLogica controladora = null;
-        private int codigoProdAEditar;
+        private String codigoProdAEditar;
 
     /**
      * Creates new form ArmarPedido
      */
-    public EditarProducto(int codigoProducto) {
+    public EditarProducto(String codigoProducto) {
         this.codigoProdAEditar = codigoProducto;
         controladora = new ControladoraLogica();
         initComponents();
@@ -224,7 +224,7 @@ public class EditarProducto extends javax.swing.JFrame implements Funcionamiento
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarCambiosActionPerformed
-        int codigoProducto = Integer.parseInt(this.txtCodProducto.getText());
+        String codigoProducto = this.txtCodProducto.getText();
         String nombre = this.txtNombre.getText();
         String descripcion = this.txatDescripcion.getText();
         int cantStock = (int) this.scrollCantStock.getValue();
@@ -301,7 +301,7 @@ public class EditarProducto extends javax.swing.JFrame implements Funcionamiento
         this.txtPrecio.setText("$");
     }
 
-    private void cargarDatosEdicion(int codigoProdAEditar) {
+    private void cargarDatosEdicion(String codigoProdAEditar) {
 
         Producto productoAEditar  = controladora.buscarProducto(codigoProdAEditar);
         

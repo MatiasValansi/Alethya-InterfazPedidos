@@ -215,7 +215,7 @@ public class AgregarProducto extends javax.swing.JFrame implements Funcionamient
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAniadirProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAniadirProductoActionPerformed
-        int codigoProducto = Integer.parseInt(this.txtCodProducto.getText());
+        String codigoProducto = this.txtCodProducto.getText();
         String nombre = this.txtNombre.getText();
         String descripcion = this.txatDescripcion.getText();
         int cantStock = (int) this.scrollCantStock.getValue();
