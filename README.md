@@ -94,7 +94,7 @@
 
 ## 🙋 Sobre el autor
 
-Desarrollado por **Matías Valansi** como proyecto de uso real para automatizar la gestión de pedidos en un comercio familiar.
+Desarrollado como proyecto de uso real para automatizar la gestión de pedidos en un comercio familiar.
 
 📌 Objetivo: Es un proyecto en el cual se pone en práctica lo aprendido en el 1° año de la carrera de Analista de Sistemas. 
 Java Avanzado, Modelo de Capas, CRUD, Bases de Datos incluyendo librerías tales como Java Swing y JPA.
