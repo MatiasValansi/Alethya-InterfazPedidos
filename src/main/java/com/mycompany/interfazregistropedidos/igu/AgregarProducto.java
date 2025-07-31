@@ -54,7 +54,7 @@ public class AgregarProducto extends javax.swing.JFrame implements Funcionamient
         lblIngresoProductos.setFont(new java.awt.Font("Engravers MT", 1, 24)); // NOI18N
         lblIngresoProductos.setText("INGRESOS DE ProductoS");
 
-        logoAlethya.setIcon(new javax.swing.ImageIcon("D:\\PROGRAMACION\\°CURSOS\\Interfaz Gráfica en Java - TodoCode\\Proyectos\\InterfazRegistroPedidos\\logoAlethya.png")); // NOI18N
+        logoAlethya.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logoAlethya.png"))); // NOI18N
 
         lblCodigoProducto.setText("Codigo Producto");
 

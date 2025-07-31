@@ -57,7 +57,7 @@ public class AgregarCliente extends javax.swing.JFrame implements Funcionamiento
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        logoAlethya.setIcon(new javax.swing.ImageIcon("D:\\PROGRAMACION\\°CURSOS\\Interfaz Gráfica en Java - TodoCode\\Proyectos\\InterfazRegistroPedidos\\logoAlethya.png")); // NOI18N
+        logoAlethya.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logoAlethya.png"))); // NOI18N
 
         lblAniadirCliente.setFont(new java.awt.Font("Engravers MT", 1, 24)); // NOI18N
         lblAniadirCliente.setText("Añadí el cliente");
