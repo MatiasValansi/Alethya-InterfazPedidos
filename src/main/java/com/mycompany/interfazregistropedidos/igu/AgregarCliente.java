@@ -261,7 +261,7 @@ public class AgregarCliente extends javax.swing.JFrame implements Funcionamiento
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void btnAniadirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAniadirClienteActionPerformed
-        int dni = Integer.parseInt(this.txtIdCliente.getText());
+        String dni = this.txtIdCliente.getText();
         String nombre = this.txtNombre.getText();
         String celular = this.txtCelular.getText();
         String email = this.txtEmail.getText();

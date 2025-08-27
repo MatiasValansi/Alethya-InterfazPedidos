@@ -14,13 +14,13 @@ import javax.swing.JOptionPane;
 public class EditarCliente extends javax.swing.JFrame implements Funcionamiento {
 
         ControladoraLogica controladora = null;
-        private int dniCliente;
+        private String dniCliente;
 
     
     /**
      * Creates new form ArmarPedido
      */
-    public EditarCliente(int dniCliente) {
+    public EditarCliente(String dniCliente) {
         this.dniCliente = dniCliente;
         controladora = new ControladoraLogica();
         initComponents();
@@ -266,7 +266,7 @@ public class EditarCliente extends javax.swing.JFrame implements Funcionamiento 
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void btnGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarCambiosActionPerformed
-        int dni = Integer.parseInt(this.txtIdCliente.getText());
+        String dni = this.txtIdCliente.getText();
         String nombre = this.txtNombre.getText();
         String celular = this.txtCelular.getText();
         String email = this.txtEmail.getText();
@@ -360,7 +360,7 @@ public class EditarCliente extends javax.swing.JFrame implements Funcionamiento 
         this.cmbCondIva.setSelectedIndex(0);
     }
 
-    private void cargarDatosEdicion(int dniCliente) {
+    private void cargarDatosEdicion(String dniCliente) {
                 
         Cliente clienteAEditar = controladora.buscarCliente(dniCliente);
         

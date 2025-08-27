@@ -112,7 +112,7 @@ public class ControladoraPersistencia {
         }
     }
 
-    public Cliente buscarCliente(int dniCliente) {
+    public Cliente buscarCliente(String dniCliente) {
         return clienteController.findCliente(dniCliente);
     }
 

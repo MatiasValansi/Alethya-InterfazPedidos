@@ -207,7 +207,7 @@ public class VerClientes extends javax.swing.JFrame implements Cargable{
         if (tablaClientes.getRowCount() > 0) {
             
             if (tablaClientes.getSelectedRow() != -1) {                
-                int dniCliente = Integer.parseInt(String.valueOf(tablaClientes.getValueAt(tablaClientes.getSelectedRow(), PRIMERA_COLUMNA)));
+                String dniCliente = String.valueOf(tablaClientes.getValueAt(tablaClientes.getSelectedRow(), PRIMERA_COLUMNA));
                 //Guardo el nombre de la persona
                 String nombreCliente = String.valueOf(tablaClientes.getValueAt(tablaClientes.getSelectedRow(), NOMBRE_COLUMNA));
                 

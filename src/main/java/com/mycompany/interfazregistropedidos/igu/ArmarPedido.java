@@ -481,7 +481,7 @@ public class ArmarPedido extends javax.swing.JFrame implements Funcionamiento, P
             
             ///Relaciones
             List<ProductoPedido> productos = new ArrayList<>(this.listaProductos);
-            int cuitCliente = Integer.parseInt(this.txtCuitCliente.getText());
+            String cuitCliente = this.txtCuitCliente.getText();
             
             this.pedidoAArmar.setFecha(fecha);
             this.pedidoAArmar.setMetodoDePago(formaPago);
@@ -625,7 +625,7 @@ public class ArmarPedido extends javax.swing.JFrame implements Funcionamiento, P
         if (!this.txtCuitCliente.equals("")) {
 
             try {
-                this.clientePedido = controladora.buscarCliente(Integer.parseInt(this.txtCuitCliente.getText()));
+                this.clientePedido = controladora.buscarCliente(this.txtCuitCliente.getText());
                 this.mostrarMensaje(clientePedido.getNombre(), "Cliente:", "Cliente Hallado");
                 this.btnClienteHallado.setText(clientePedido.getNombre());
                 

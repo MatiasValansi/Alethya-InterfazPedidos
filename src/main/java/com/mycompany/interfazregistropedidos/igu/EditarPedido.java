@@ -469,7 +469,7 @@ public class EditarPedido extends javax.swing.JFrame implements Funcionamiento, 
             
             ///Relaciones
             List<ProductoPedido> productos = new ArrayList<>(this.listaProductos);
-            int cuitCliente = Integer.parseInt(this.txtCuitCliente.getText());
+            String cuitCliente = this.txtCuitCliente.getText();
             
             this.pedidoAArmar.setFecha(fecha);
             this.pedidoAArmar.setMetodoDePago(formaPago);

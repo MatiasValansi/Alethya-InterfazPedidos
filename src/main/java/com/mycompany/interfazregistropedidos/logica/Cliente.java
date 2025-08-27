@@ -11,7 +11,7 @@ import javax.persistence.OneToMany;
 public class Cliente implements Serializable {
     
     @Id
-    private int dni;
+    private String dni;
     private String nombre;
     private String celular;
     private String mail;
@@ -30,7 +30,7 @@ public class Cliente implements Serializable {
     //El Cliente es creado SIN Pedidos, es decir, su lista estará vacía
     
     @SuppressWarnings("Convert2Diamond")
-    public Cliente(int dni, String nombre, String celular, String mail, String direccion, String localidad, String provincia, String condicionIva) {
+    public Cliente(String dni, String nombre, String celular, String mail, String direccion, String localidad, String provincia, String condicionIva) {
         this.dni = dni;
         this.nombre = nombre;
         this.celular = celular;
@@ -42,11 +42,11 @@ public class Cliente implements Serializable {
         this.pedidos = new ArrayList<Pedido>();
     }
 
-    public int getDni() {
+    public String getDni() {
         return dni;
     }
 
-    public void setDni(int dni) {
+    public void setDni(String dni) {
         this.dni = dni;
     }
 
@@ -119,19 +119,7 @@ public class Cliente implements Serializable {
         return  nombre ;
     }
     
-    /*
-    public int calcularCantProductosTotales(){
         
-        int cantProdTotales = 0;
-        
-        for (Pedido cadaPedido : pedidos) {
-            cantProdTotales += cadaPedido.getCantProductosTotales();
-        }
-        
-        return cantProdTotales;
-    }
-    */
-    
     public int calcTotalProductos(Pedido pedidoACalcular){
         return pedidoACalcular.calcularCantProductosTotales();
     }

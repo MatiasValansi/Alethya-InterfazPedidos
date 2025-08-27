@@ -17,7 +17,7 @@ public class ControladoraLogica {
     ControladoraPersistencia controlPers = new ControladoraPersistencia();
 
     //Método Guardar de ArmarPedido
-    public void guardarPedido(Date fecha, MetodoPago formaPago, double total, List<ProductoPedido> productos, int cuitCliente) {
+    public void guardarPedido(Date fecha, MetodoPago formaPago, double total, List<ProductoPedido> productos, String cuitCliente) {
      
         //Genero el Cliente
         
@@ -58,7 +58,7 @@ public class ControladoraLogica {
     Creo una sobrecarga de guardarPedido() para guardar un Pedido vacío en la BD y así poder usarlo para guardar un ProductoPedido en la BD.
     El ProductoPedido NO se puede guardar en la BD sin antes tener el Pedido y el Producto correspondientes en la BD.
     */
-    public void guardarPedido(Pedido pedido, int cuitCliente) {
+    public void guardarPedido(Pedido pedido, String cuitCliente) {
      
         //Genero el Cliente
         
@@ -93,7 +93,7 @@ public class ControladoraLogica {
     }
 
     //Método Guardar de AgregarCliente
-    public void guardarCliente(int dni, String nombre, String celular, String email, String direccion, String localidad, String provincia, String consumidorFinal) {
+    public void guardarCliente(String dni, String nombre, String celular, String email, String direccion, String localidad, String provincia, String consumidorFinal) {
         
         //Genero el Cliente
         Cliente cliente = new Cliente();
@@ -168,11 +168,11 @@ public class ControladoraLogica {
         controlPers.eliminarProductoPedido(idProductoPedido);
     }
      
-    public Cliente buscarCliente(int dniCliente) {
+    public Cliente buscarCliente(String dniCliente) {
         return controlPers.buscarCliente(dniCliente);
     }
 
-    public void editarCliente(int dni, String nombre, String celular, String email, String direccion, String localidad, String provincia, String consumidorFinal) {
+    public void editarCliente(String dni, String nombre, String celular, String email, String direccion, String localidad, String provincia, String consumidorFinal) {
         
         //Genero el Cliente a Editar. OJO, debe tener el mismo ID del Cliente ya existente debido a que es el ID y lo buscará mediante el ID en la BD.
         Cliente clienteEditado = new Cliente(dni, nombre, celular, email, direccion, localidad, provincia, consumidorFinal);
@@ -211,7 +211,7 @@ public class ControladoraLogica {
         return controlPers.buscarPedido(numRemito);
     }
 
-    public void editarPedido(int remito, Date fecha, MetodoPago formaPago, double total, List<ProductoPedido> productos, int cuitCliente) {
+    public void editarPedido(int remito, Date fecha, MetodoPago formaPago, double total, List<ProductoPedido> productos, String cuitCliente) {
         
         Pedido pedidoEditado = this.buscarPedido(remito);
         pedidoEditado.setFecha(fecha);
