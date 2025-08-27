@@ -33,9 +33,8 @@ public class ArmarPedido extends javax.swing.JFrame implements Funcionamiento, P
     private Cliente clientePedido = null;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy"); //Para añadir un calendario
     static List<ProductoPedido> listaProductos; // Será STATIC así por cada instancia de ArmarPedido que se crea al EditarProdPedido, se mantiene la lista
-    private int PRIMERA_COLUMNA = 0;
-    private int NOMBRE_COLUMNA = 1;
-    private int TERCER_COLUMNA = 2;
+    private int COLUMNA_PROD_PED_OCULTA = 0;
+    private int NOMBRE_COLUMNA = 2;
     private int MINIMO = 0;
     
     /**
@@ -107,6 +106,11 @@ public class ArmarPedido extends javax.swing.JFrame implements Funcionamiento, P
         lblCodProducto.setText("Codigo Producto");
 
         txtCodProducto.setText("102703");
+        txtCodProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCodProductoActionPerformed(evt);
+            }
+        });
 
         lblCantProducto.setText("Seleccione Cantidad");
 
@@ -318,13 +322,13 @@ public class ArmarPedido extends javax.swing.JFrame implements Funcionamiento, P
 
         tablaProductoPedidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Codigo Producto", "Nombre", "Precio Unitario", "Cantidad", "Total por Producto"
+                "Nombre", "Precio Unitario", "Cantidad", "Total por Producto"
             }
         ));
         jScrollPane1.setViewportView(tablaProductoPedidos);
@@ -497,8 +501,6 @@ public class ArmarPedido extends javax.swing.JFrame implements Funcionamiento, P
                 cadaProdPedido.getProducto().descontarStock(cadaProdPedido.getCantProducto());
                 //Debo editar en la BD el Producto con el nuevo stock
                 controladora.editarProducto(cadaProdPedido.getProducto().getCodigo(), cadaProdPedido.getProducto().getNombre(), cadaProdPedido.getProducto().getDescripcion(),cadaProdPedido.getProducto().getCantStock(), cadaProdPedido.getProducto().getPrecio());
-        
-                
                 controladora.guardarProductoPedido(cadaProdPedido);
             }
             
@@ -529,7 +531,7 @@ public class ArmarPedido extends javax.swing.JFrame implements Funcionamiento, P
                 JOptionPane.ERROR_MESSAGE);
         } catch (Exception ex) {
             Logger.getLogger(ArmarPedido.class.getName()).log(Level.SEVERE, null, ex);
-            this.mostrarMensajeError("No se pudo realizar el pedido por un error", "Pedido Inválido");
+            this.mostrarMensajeError(ex.getMessage(), "Pedido Inválido");
         }
         
     }//GEN-LAST:event_btnArmarPedidoActionPerformed
@@ -588,10 +590,12 @@ public class ArmarPedido extends javax.swing.JFrame implements Funcionamiento, P
         if (tablaProductoPedidos.getRowCount() > 0) {
             
             if (tablaProductoPedidos.getSelectedRow() != -1) {                
-                int idProductoPedido = Integer.parseInt(String.valueOf(tablaProductoPedidos.getValueAt(tablaProductoPedidos.getSelectedRow(), PRIMERA_COLUMNA)));
+                ProductoPedido prodPedidoAEliminar = (ProductoPedido) tablaProductoPedidos.getValueAt(tablaProductoPedidos.getSelectedRow(), COLUMNA_PROD_PED_OCULTA);
                 //Guardo el nombre de la persona
                 String nombreProductoPedido = String.valueOf(tablaProductoPedidos.getValueAt(tablaProductoPedidos.getSelectedRow(), NOMBRE_COLUMNA));
-                controladora.eliminarProductoPedido(idProductoPedido);
+                //OBS --> NO lo tiene que eliminar de la BD, sino de this.listaProductos porque al presionar 'Añadir Producto al Pedido', el ProductoPedido NO se añade a la BD, sino a this.listaProductos 
+                this.listaProductos.remove(prodPedidoAEliminar); 
+                
                 /*
                 Explicación:
                 idProductoPedido: Requiere de un N° entero. Como la BD convierte todos los numeros a String, debo parsear el DNI de String a int mediante Integer.parseInt().
@@ -652,7 +656,7 @@ public class ArmarPedido extends javax.swing.JFrame implements Funcionamiento, P
         if (!this.txtCodProducto.equals("")) {
 
             try {
-                this.productoArmarPedido = controladora.buscarProducto(this.txtCodProducto.getText());
+                this.productoArmarPedido = controladora.buscarProducto(this.txtCodProducto.getText().toUpperCase());
                 this.mostrarMensaje(productoArmarPedido.getNombre(), "Producto:", "Producto Hallado");
                 this.btnProductoHallado.setText(productoArmarPedido.getNombre());
 
@@ -672,7 +676,7 @@ public class ArmarPedido extends javax.swing.JFrame implements Funcionamiento, P
                 
                 //int idProductoPedido = Integer.parseInt(String.valueOf(tablaProductoPedidos.getValueAt(tablaProductoPedidos.getSelectedRow(), PRIMERA_COLUMNA)));
                 //Guardo el nombre del Producto
-                String nombreProductoPedido = String.valueOf(tablaProductoPedidos.getValueAt(tablaProductoPedidos.getSelectedRow(), TERCER_COLUMNA));
+                String nombreProductoPedido = String.valueOf(tablaProductoPedidos.getValueAt(tablaProductoPedidos.getSelectedRow(), NOMBRE_COLUMNA));
                
                 EditarProductoPedido pantallaEditarProdPed = new EditarProductoPedido(nombreProductoPedido, this);
                 pantallaEditarProdPed.setVisible(true);
@@ -703,6 +707,10 @@ public class ArmarPedido extends javax.swing.JFrame implements Funcionamiento, P
     private void txtCuitClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCuitClienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCuitClienteActionPerformed
+
+    private void txtCodProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodProductoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCodProductoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -798,16 +806,23 @@ public class ArmarPedido extends javax.swing.JFrame implements Funcionamiento, P
         //Celda: Intersección entre fila y columna de la modeloTabla
         
         //Establecemos el nombre de las columnas
-        String titulosColumnas[] = {"ID", "Código", "Nombre", "$ Precio Unitario", "Cantidad", "$ Total por Producto"};
+        /*
+        OBS: La primera columna será ProductoPedido para tener referencia a este objeto, como por ejemplo, para después poder eliminarlo. 
+        Esta primera columna será oculta debido a que solo estará para tener al objeto, NO para mostrar información
+        */
+        String titulosColumnas[] = {"ProductoPedido","Código", "Nombre", "Cantidad", "$ Precio Unitario", "$ Total por Producto"};
         //Para asignar el nombre de las columnas a la modeloTabla
         modeloTabla.setColumnIdentifiers(titulosColumnas);
         
         //Cargo los datos desde la Base de Datos a una lista
         //List<ProductoPedido> listaProductosPedidos = controladora.buscarProductosPedidos();
         
-        //Cargo los datos en la lista desde el Static listaProductos 
-        
+        //Cargo los datos en la lista desde el Static listaProductos         
         this.agregarElementos(modeloTabla, listaProductos);
+        
+        //Oculto la columna ProductoPedido debido a que no mostrará información
+        tablaProductoPedidos.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+        tablaProductoPedidos.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
     }
 
     /*
@@ -819,7 +834,7 @@ public class ArmarPedido extends javax.swing.JFrame implements Funcionamiento, P
             for (ProductoPedido cadaProductoPedido : listaProductosPedidos) {
                 //Creo un Array Generico porque cada tipo de dato que posee cada Producto es distinto                Object[] productoPedido = {cadaProductoPedido.getId(), cadaProductoPedido.getProducto().getCodigo(), cadaProductoPedido.getProducto().getNombre(), cadaProductoPedido.getProducto().getPrecio(), cadaProductoPedido.getCantProducto(), cadaProductoPedido.getProducto().getPrecio() * cadaProductoPedido.getCantProducto()};
 
-                Object[] productoPedido = {cadaProductoPedido.getId(), cadaProductoPedido.getProducto().getCodigo(), cadaProductoPedido.getProducto().getNombre(), cadaProductoPedido.getProducto().getPrecio(), cadaProductoPedido.getCantProducto(), cadaProductoPedido.getProducto().getPrecio() * cadaProductoPedido.getCantProducto()};
+                Object[] productoPedido = {cadaProductoPedido,cadaProductoPedido.getProducto().getCodigo(), cadaProductoPedido.getProducto().getNombre(), cadaProductoPedido.getCantProducto(),cadaProductoPedido.getProducto().getPrecio(), cadaProductoPedido.getProducto().getPrecio() * cadaProductoPedido.getCantProducto()};
                 //Obs: El length del Array debe coincidir con el length de titulosColumnas[]
                 
                 modeloTabla.addRow(productoPedido);

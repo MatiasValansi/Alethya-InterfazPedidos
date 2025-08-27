@@ -78,7 +78,7 @@ public class ControladoraPersistencia {
         return productoPedidoController.findProductoPedidoEntities();
     }
 
-    public void eliminarCliente(int dniCliente) {
+    public void eliminarCliente(String dniCliente) {
         try {
             clienteController.destroy(dniCliente);
         } catch (com.mycompany.interfazregistropedidos.exceptions.NonexistentEntityException ex) {

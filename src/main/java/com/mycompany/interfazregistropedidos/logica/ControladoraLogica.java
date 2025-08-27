@@ -40,12 +40,41 @@ public class ControladoraLogica {
     }
         
         */
-        pedido.setFecha(fecha);
-        pedido.setMetodoDePago(formaPago);
-        pedido.setTotal(total);
-        pedido.setProductos(productos);
-        pedido.setCliente(cliente);
         
+        if (fecha == null) {
+            throw new IllegalArgumentException("La fecha del pedido no puede ser nula");
+        } else {
+            pedido.setFecha(fecha);
+        }
+
+        if (formaPago == null) {
+            throw new IllegalArgumentException("Debe seleccionar un método de pago");
+        } else {
+            pedido.setMetodoDePago(formaPago);
+        }
+
+        if (total <= 0) {
+            throw new IllegalArgumentException("El total del pedido debe ser mayor a 0");
+        } else {
+            pedido.setTotal(total);
+        }
+
+        if (cuitCliente == null || cuitCliente.trim().isEmpty()) {
+            throw new IllegalArgumentException("Debe ingresar un CUIT de cliente válido");
+        }
+        
+        if (cliente == null) {
+            throw new IllegalArgumentException("El cliente con CUIT " + cuitCliente + " no existe");
+        } else {
+            pedido.setCliente(cliente);
+        }
+
+        if (productos == null || productos.isEmpty()) {
+            throw new IllegalArgumentException("Debe añadir al menos un producto al pedido");
+        } else {
+            pedido.setProductos(productos);        
+        }
+
         controlPers.guardarPedido(pedido); 
         //Guardo el Pedido solamente porque para que exista el Cliente, este ya debe estar en la BD.
         
@@ -83,30 +112,31 @@ public class ControladoraLogica {
         
         //Genero el Producto
         Producto producto = new Producto();
-        producto.setCodigo(codigoProducto);
-        producto.setNombre(nombre);
         producto.setDescripcion(descripcion);
-        producto.setCantStock(cantStock);
-        producto.setPrecio(precio);
+        
         
         if (codigoProducto == null || codigoProducto.trim().isEmpty()) {
             throw new IllegalArgumentException("El código del producto no puede estar vacío");
+        } else {
+            producto.setCodigo(codigoProducto);
         }
 
         if (nombre == null || nombre.trim().isEmpty()) {
             throw new IllegalArgumentException("El nombre del producto no puede estar vacío");
+        } else {
+            producto.setNombre(nombre);
         }
-
-        if (descripcion == null || descripcion.trim().isEmpty()) {
-            throw new IllegalArgumentException("La descripción no puede estar vacía");
-        }
-
+        
         if (cantStock < 0) {
             throw new IllegalArgumentException("La cantidad en stock no puede ser negativa");
+        } else {
+            producto.setCantStock(cantStock);
         }
 
         if (precio <= 0) {
             throw new IllegalArgumentException("El precio debe ser mayor a 0");
+        } else {
+            producto.setPrecio(precio);
         }
         
         controlPers.guardarProducto(producto);
@@ -117,8 +147,8 @@ public class ControladoraLogica {
         
         //Genero el Cliente
         Cliente cliente = new Cliente();
-        cliente.setDni(dni);
-        cliente.setNombre(nombre);
+        
+        
         cliente.setCelular(celular);
         cliente.setMail(email);
         cliente.setDireccion(direccion);
@@ -128,9 +158,13 @@ public class ControladoraLogica {
         
         if (dni == null || dni.isEmpty()) {
             throw new IllegalArgumentException("El DNI no puede estar vacío");
+        } else {
+            cliente.setDni(dni);
         }
         if (nombre == null || nombre.isEmpty()) {
             throw new IllegalArgumentException("El nombre no puede estar vacío");
+        } else {
+            cliente.setNombre(nombre);
         }
         if (!dni.matches("\\d+")) {
             throw new IllegalArgumentException("El DNI debe contener solo números");
@@ -181,7 +215,7 @@ public class ControladoraLogica {
         return controlPers.buscarProductosPedidos();
     }
 
-    public void eliminarCliente(int dniCliente) {
+    public void eliminarCliente(String dniCliente) {
         controlPers.eliminarCliente(dniCliente);
     }
 

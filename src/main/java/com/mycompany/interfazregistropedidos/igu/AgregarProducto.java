@@ -58,7 +58,11 @@ public class AgregarProducto extends javax.swing.JFrame implements Funcionamient
 
         lblCodigoProducto.setText("Codigo Producto");
 
-        txtCodProducto.setText("#0101");
+        txtCodProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCodProductoActionPerformed(evt);
+            }
+        });
 
         txtDescripcion.setText("Descripción");
 
@@ -216,7 +220,7 @@ public class AgregarProducto extends javax.swing.JFrame implements Funcionamient
 
     private void btnAniadirProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAniadirProductoActionPerformed
         try {
-            String codigoProducto = this.txtCodProducto.getText();
+            String codigoProducto = this.txtCodProducto.getText().toUpperCase();
             String nombre = this.txtNombre.getText();
             String descripcion = this.txatDescripcion.getText();
             int cantStock = (int) this.scrollCantStock.getValue();
@@ -243,6 +247,10 @@ public class AgregarProducto extends javax.swing.JFrame implements Funcionamient
     private void btnLVolverMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLVolverMenuActionPerformed
         this.volverAlMenu();
     }//GEN-LAST:event_btnLVolverMenuActionPerformed
+
+    private void txtCodProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodProductoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCodProductoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -298,7 +306,7 @@ public class AgregarProducto extends javax.swing.JFrame implements Funcionamient
         this.txtNombre.setText("");
         this.txatDescripcion.setText("");
         this.scrollCantStock.setValue(0);
-        this.txtPrecio.setText("$");
+        this.txtPrecio.setText("");
     }
     
 }

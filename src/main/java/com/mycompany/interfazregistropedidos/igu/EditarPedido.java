@@ -110,6 +110,11 @@ public class EditarPedido extends javax.swing.JFrame implements Funcionamiento, 
         lblCodProducto.setText("Codigo Producto");
 
         txtCodProducto.setText("1");
+        txtCodProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCodProductoActionPerformed(evt);
+            }
+        });
 
         lblCantProducto.setText("Seleccione Cantidad");
 
@@ -619,7 +624,7 @@ public class EditarPedido extends javax.swing.JFrame implements Funcionamiento, 
         if (!this.txtCodProducto.equals("")) {
 
             try {
-                this.productoArmarPedido = controladora.buscarProducto(this.txtCodProducto.getText());
+                this.productoArmarPedido = controladora.buscarProducto(this.txtCodProducto.getText().toUpperCase());
                 this.mostrarMensaje(productoArmarPedido.getNombre(), "Producto:", "Producto Hallado");
                 this.btnProductoHallado.setText(productoArmarPedido.getNombre());
 
@@ -640,7 +645,7 @@ try {
                 
                 //int idProductoPedido = Integer.parseInt(String.valueOf(tablaProductoPedidos.getValueAt(tablaProductoPedidos.getSelectedRow(), PRIMERA_COLUMNA)));
                 //Guardo el nombre del Producto
-                String nombreProductoPedido = String.valueOf(tablaProductoPedidos.getValueAt(tablaProductoPedidos.getSelectedRow(), TERCER_COLUMNA));
+                String nombreProductoPedido = String.valueOf(tablaProductoPedidos.getValueAt(tablaProductoPedidos.getSelectedRow(), NOMBRE_COLUMNA));
                
                 EditarProductoPedido pantallaEditarProdPed = new EditarProductoPedido(nombreProductoPedido, this);
                 pantallaEditarProdPed.setVisible(true);
@@ -666,6 +671,10 @@ try {
     private void lblClienteEncontradoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblClienteEncontradoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_lblClienteEncontradoActionPerformed
+
+    private void txtCodProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodProductoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCodProductoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -758,7 +767,7 @@ try {
         //Celda: Intersección entre fila y columna de la modeloTabla
         
         //Establecemos el nombre de las columnas
-        String titulosColumnas[] = {"ID", "Código", "Nombre", "$ Precio Unitario", "Cantidad", "$ Total por Producto"};
+        String titulosColumnas[] = {"Código", "Nombre", "Cantidad", "$ Precio Unitario", "$ Total por Producto"};
         //Para asignar el nombre de las columnas a la modeloTabla
         modeloTabla.setColumnIdentifiers(titulosColumnas);
         
@@ -781,7 +790,7 @@ try {
             for (ProductoPedido cadaProductoPedido : listaProductosPedidos) {
                 //Creo un Array Generico porque cada tipo de dato que posee cada Producto es distinto                Object[] productoPedido = {cadaProductoPedido.getId(), cadaProductoPedido.getProducto().getCodigo(), cadaProductoPedido.getProducto().getNombre(), cadaProductoPedido.getProducto().getPrecio(), cadaProductoPedido.getCantProducto(), cadaProductoPedido.getProducto().getPrecio() * cadaProductoPedido.getCantProducto()};
 
-                Object[] productoPedido = {cadaProductoPedido.getId(), cadaProductoPedido.getProducto().getCodigo(), cadaProductoPedido.getProducto().getNombre(), cadaProductoPedido.getProducto().getPrecio(), cadaProductoPedido.getCantProducto(), cadaProductoPedido.getProducto().getPrecio() * cadaProductoPedido.getCantProducto()};
+                Object[] productoPedido = {cadaProductoPedido.getProducto().getCodigo(), cadaProductoPedido.getProducto().getNombre(), cadaProductoPedido.getCantProducto(), cadaProductoPedido.getProducto().getPrecio(), cadaProductoPedido.getProducto().getPrecio() * cadaProductoPedido.getCantProducto()};
                 //Obs: El length del Array debe coincidir con el length de titulosColumnas[]
                 
                 modeloTabla.addRow(productoPedido);
