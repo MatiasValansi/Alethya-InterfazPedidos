@@ -102,7 +102,7 @@ public class AgregarCliente extends javax.swing.JFrame implements Funcionamiento
             }
         });
 
-        cmbCondIva.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CONSUMIDOR FINAL", "INSCRIPTO", "EXCENTO" }));
+        cmbCondIva.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CONSUMIDOR FINAL", "MONOTRIBUTO", "RESPONSABLE INSCRIPTO" }));
         cmbCondIva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbCondIvaActionPerformed(evt);
@@ -219,7 +219,7 @@ public class AgregarCliente extends javax.swing.JFrame implements Funcionamiento
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(68, 68, 68)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 121, Short.MAX_VALUE))
+                .addGap(0, 116, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -261,19 +261,24 @@ public class AgregarCliente extends javax.swing.JFrame implements Funcionamiento
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void btnAniadirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAniadirClienteActionPerformed
-        String dni = this.txtIdCliente.getText();
-        String nombre = this.txtNombre.getText();
-        String celular = this.txtCelular.getText();
-        String email = this.txtEmail.getText();
-        String direccion = this.txtDireccion.getText();
-        String localidad = this.txtLocalidad.getText();
-        String provincia = this.txtProvincia.getText();
-        String consumidorFinal = this.cmbCondIva.getSelectedItem().toString();
+        try {
+            String dni = this.txtIdCliente.getText();
+            String nombre = this.txtNombre.getText();
+            String celular = this.txtCelular.getText();
+            String email = this.txtEmail.getText();
+            String direccion = this.txtDireccion.getText();
+            String localidad = this.txtLocalidad.getText();
+            String provincia = this.txtProvincia.getText();
+            String consumidorFinal = this.cmbCondIva.getSelectedItem().toString();
+
+            controladora.guardarCliente(dni, nombre, celular, email, direccion, localidad, provincia, consumidorFinal);
+
+            this.mostrarCartel();
+            this.limpiar();    
+        } catch (Exception e) {
+            this.mostrarMensajeError(e.getMessage(), "Error Cliente");
+        }
         
-        controladora.guardarCliente(dni, nombre, celular, email, direccion, localidad, provincia, consumidorFinal);
-        
-        this.mostrarCartel();
-        this.limpiar();
         
         
     }//GEN-LAST:event_btnAniadirClienteActionPerformed
@@ -321,6 +326,14 @@ public class AgregarCliente extends javax.swing.JFrame implements Funcionamiento
     private javax.swing.JTextField txtProvincia;
     // End of variables declaration//GEN-END:variables
 
+    private void mostrarMensajeError(String mensaje, String titulo) {
+        JOptionPane optionPane = new JOptionPane( mensaje);//Cuerpo del mensaje 
+        optionPane.setMessageType (JOptionPane.ERROR_MESSAGE); //Muestro la ventana 
+        JDialog dialog = optionPane.createDialog(titulo); //Titulo
+        dialog.setAlwaysOnTop (true); // Que aparezca la ventana sobre el restp
+        dialog.setVisible(true); //Que sea visible
+    }
+    
     @Override
     public void mostrarCartel() {
         //Ventana que mostrará que el CLiente fue añadido correctamente

@@ -215,16 +215,21 @@ public class AgregarProducto extends javax.swing.JFrame implements Funcionamient
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAniadirProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAniadirProductoActionPerformed
-        String codigoProducto = this.txtCodProducto.getText();
-        String nombre = this.txtNombre.getText();
-        String descripcion = this.txatDescripcion.getText();
-        int cantStock = (int) this.scrollCantStock.getValue();
-        double precio = Double.parseDouble(this.txtPrecio.getText());
+        try {
+            String codigoProducto = this.txtCodProducto.getText();
+            String nombre = this.txtNombre.getText();
+            String descripcion = this.txatDescripcion.getText();
+            int cantStock = (int) this.scrollCantStock.getValue();
+            double precio = Double.parseDouble(this.txtPrecio.getText());
+
+            controladora.guardarProducto(codigoProducto, nombre, descripcion, cantStock, precio);
+
+            this.mostrarCartel();
+            this.limpiar();
+        } catch (Exception e) {
+          this.mostrarMensajeError(e.getMessage(), "Error Producto");
+        }
         
-        controladora.guardarProducto(codigoProducto, nombre, descripcion, cantStock, precio);
-        
-        this.mostrarCartel();
-        this.limpiar();
     }//GEN-LAST:event_btnAniadirProductoActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
@@ -260,7 +265,15 @@ public class AgregarProducto extends javax.swing.JFrame implements Funcionamient
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPrecio;
     // End of variables declaration//GEN-END:variables
-
+    
+    private void mostrarMensajeError(String mensaje, String titulo) {
+        JOptionPane optionPane = new JOptionPane( mensaje);//Cuerpo del mensaje 
+        optionPane.setMessageType (JOptionPane.ERROR_MESSAGE); //Muestro la ventana 
+        JDialog dialog = optionPane.createDialog(titulo); //Titulo
+        dialog.setAlwaysOnTop (true); // Que aparezca la ventana sobre el restp
+        dialog.setVisible(true); //Que sea visible
+    }
+    
     @Override
     public void mostrarCartel() {
         //Ventana que mostrará que el Pedido fue añadido correctamente

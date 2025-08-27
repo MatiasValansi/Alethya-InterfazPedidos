@@ -88,7 +88,27 @@ public class ControladoraLogica {
         producto.setDescripcion(descripcion);
         producto.setCantStock(cantStock);
         producto.setPrecio(precio);
-    
+        
+        if (codigoProducto == null || codigoProducto.trim().isEmpty()) {
+            throw new IllegalArgumentException("El código del producto no puede estar vacío");
+        }
+
+        if (nombre == null || nombre.trim().isEmpty()) {
+            throw new IllegalArgumentException("El nombre del producto no puede estar vacío");
+        }
+
+        if (descripcion == null || descripcion.trim().isEmpty()) {
+            throw new IllegalArgumentException("La descripción no puede estar vacía");
+        }
+
+        if (cantStock < 0) {
+            throw new IllegalArgumentException("La cantidad en stock no puede ser negativa");
+        }
+
+        if (precio <= 0) {
+            throw new IllegalArgumentException("El precio debe ser mayor a 0");
+        }
+        
         controlPers.guardarProducto(producto);
     }
 
@@ -106,6 +126,15 @@ public class ControladoraLogica {
         cliente.setProvincia(provincia);
         cliente.setCondicionIva(consumidorFinal);
         
+        if (dni == null || dni.isEmpty()) {
+            throw new IllegalArgumentException("El DNI no puede estar vacío");
+        }
+        if (nombre == null || nombre.isEmpty()) {
+            throw new IllegalArgumentException("El nombre no puede estar vacío");
+        }
+        if (!dni.matches("\\d+")) {
+            throw new IllegalArgumentException("El DNI debe contener solo números");
+        }
         controlPers.guardarCliente(cliente);
         
     }

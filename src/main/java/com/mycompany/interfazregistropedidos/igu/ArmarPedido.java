@@ -529,6 +529,7 @@ public class ArmarPedido extends javax.swing.JFrame implements Funcionamiento, P
                 JOptionPane.ERROR_MESSAGE);
         } catch (Exception ex) {
             Logger.getLogger(ArmarPedido.class.getName()).log(Level.SEVERE, null, ex);
+            this.mostrarMensajeError("No se pudo realizar el pedido por un error", "Pedido Inválido");
         }
         
     }//GEN-LAST:event_btnArmarPedidoActionPerformed
