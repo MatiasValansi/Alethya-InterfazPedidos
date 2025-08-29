@@ -129,7 +129,6 @@ public class EditarProductoPedido extends javax.swing.JFrame {
         if (cantProdPedido > prodPedidoEditado.obtenerCantStock() || cantProdPedido <= MINIMO) {
             throw new StockInvalidoException("Stock Inválido");
         }
-        prodPedidoEditado.getProducto().descontarStock(cantProdPedido);
         
             
         if (prodPedidoEditado != null) {
