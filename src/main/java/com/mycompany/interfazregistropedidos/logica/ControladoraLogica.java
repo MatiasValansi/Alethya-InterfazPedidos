@@ -220,6 +220,19 @@ public class ControladoraLogica {
     }
 
     public void eliminarPedido(int remitoPedido) {
+        Pedido pedidoAEliminar = this.buscarPedido(remitoPedido);
+        
+        if (pedidoAEliminar != null) {
+                //El pedido de que sus productos restablezcan el stock.
+                pedidoAEliminar.restaurarStockProductos();
+                //Guardo los cambios en la BD para actualizar el stock de cada producto
+                for (ProductoPedido cadaProdPedido : pedidoAEliminar.getProductos()) {
+                    Producto productoRestaurado = cadaProdPedido.getProducto();
+                    controlPers.editarProducto(productoRestaurado);
+             }
+        }
+        
+        //Una vez restaurado los stocks de cada producto del pedido, elimino el Pedido.
         controlPers.eliminarPedido(remitoPedido);
     }
 

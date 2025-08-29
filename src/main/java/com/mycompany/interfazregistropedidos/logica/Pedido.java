@@ -195,7 +195,16 @@ public class Pedido implements Serializable {
         productoPedido.desasociarPedido();
     }
     
-    
+    /*
+    Método para restaurar la cantidad de stock de cada producto que posee este Pedido
+    */
+    public void restaurarStockProductos(){
+     for (ProductoPedido cadaProdPedido : this.productos) {
+                Producto productoARestaurar = cadaProdPedido.getProducto();
+                int stockRestaurado = productoARestaurar.getCantStock() + cadaProdPedido.getCantProducto();
+                productoARestaurar.setCantStock(stockRestaurado);   
+    }
+   }
     
 }
 

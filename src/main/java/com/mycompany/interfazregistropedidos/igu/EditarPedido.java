@@ -854,7 +854,7 @@ try {
         
         Pedido pedidoAEditar = controladora.buscarPedido(numRemito);
         
-        this.txtFecha.setText(String.valueOf(pedidoAEditar.getFecha()));
+        this.txtFecha.setText(String.valueOf(dateFormat.format(pedidoAEditar.getFecha())));
         this.txtRemito.setText(String.valueOf(pedidoAEditar.getRemito()));
         this.txtRemito.setEditable(false);
         this.txtCuitCliente.setText(String.valueOf(pedidoAEditar.getCliente().getDni()));

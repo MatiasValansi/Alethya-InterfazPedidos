@@ -160,6 +160,8 @@ public class VerPedidos extends javax.swing.JFrame implements Cargable{
             if (tablaPedidos.getSelectedRow() != -1) {                
                 int remitoPedido = Integer.parseInt(String.valueOf(tablaPedidos.getValueAt(tablaPedidos.getSelectedRow(), COLUMNA_ID)));
                 //Guardo el nombre de la persona
+                Pedido pedidoAEliminar = controladora.buscarPedido(remitoPedido);
+                
                 controladora.eliminarPedido(remitoPedido);
                 /*
                 Explicación:
